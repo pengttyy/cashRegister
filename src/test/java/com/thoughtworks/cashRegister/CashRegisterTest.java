@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.thoughtworks.cashRegister.data.XMLCommodityService;
 import com.thoughtworks.cashRegister.obj.Shoppinglist;
 
 import static org.junit.Assert.*;
@@ -16,7 +17,7 @@ public class CashRegisterTest {
 
 	@Before
 	public void setUp() {
-		this.cashRegister = new CashRegister();
+		this.cashRegister = new CashRegister(new XMLCommodityService());
 	}
 
 	@Test
@@ -25,7 +26,7 @@ public class CashRegisterTest {
 		barcodes.add("ITEM000001");
 		barcodes.add("ITEM000002");
 		this.cashRegister.setBarcode(barcodes);
-		assertTotal(cashRegister.calculate(), new BigDecimal(25));
+		assertTotal(cashRegister.calculate(), new BigDecimal(4));
 	}
 
 	@Test
@@ -34,7 +35,7 @@ public class CashRegisterTest {
 		barcodes.add("ITEM000001-2");
 		barcodes.add("ITEM000002-3");
 		this.cashRegister.setBarcode(barcodes);
-		assertTotal(cashRegister.calculate(), new BigDecimal(65));
+		assertTotal(cashRegister.calculate(), new BigDecimal(9));
 	}
 
 	/**
@@ -48,7 +49,6 @@ public class CashRegisterTest {
 		try {
 			List<String> barcodes = new ArrayList<String>();
 			barcodes.add("ITEM000001");
-			barcodes.add("ITEM000002");
 			barcodes.add(noIncludCommodity);// 未收录的商品
 
 			this.cashRegister.setBarcode(barcodes);
@@ -56,13 +56,13 @@ public class CashRegisterTest {
 			fail("计算未收录的商品时应该抛出异常");
 		} catch (Exception e) {
 			String message = e.getMessage();
-			assertEquals("未收录[" + noIncludCommodity + "]此商品信息，请先收录商品信息！", message);
+			assertEquals("未根据条形码【" + noIncludCommodity + "】，找到对应商品！请录入", message);
 		}
 	}
 
 	private void assertTotal(Shoppinglist shoppings, BigDecimal expectTotal) {
 		assertNotNull(shoppings);
-		assertEquals(expectTotal, shoppings.getTotal());
+		assertEquals(expectTotal.setScale(2), shoppings.getTotal());
 	}
 
 }
