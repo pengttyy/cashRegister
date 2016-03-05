@@ -4,15 +4,23 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.thoughtworks.cashRegister.data.ICommodityService;
+import com.thoughtworks.cashRegister.data.IRuleService;
 import com.thoughtworks.cashRegister.obj.Commodity;
+import com.thoughtworks.cashRegister.obj.CommodityItem;
 import com.thoughtworks.cashRegister.obj.Shoppinglist;
+import com.thoughtworks.cashRegister.rule.BuyTwoGiveA;
+import com.thoughtworks.cashRegister.rule.Discount;
+import com.thoughtworks.cashRegister.rule.Normalization;
+import com.thoughtworks.cashRegister.rule.RuleEnum;
 
 public class CashRegister {
 	private List<String> barcodes;
 	private ICommodityService commodityService;
+	private IRuleService ruleService;
 
-	public CashRegister(ICommodityService commodityService) {
+	public CashRegister(ICommodityService commodityService, IRuleService ruleService) {
 		this.commodityService = commodityService;
+		this.ruleService = ruleService;
 	}
 
 	public void setBarcode(List<String> barcodes) {
@@ -20,13 +28,11 @@ public class CashRegister {
 	}
 
 	public Shoppinglist calculate() {
-		BigDecimal total = new BigDecimal(0);
+		Shoppinglist shoppinglist = new Shoppinglist();
 		for (String barcode : barcodes) {
 			String[] barCodeInfo = barcode.split("-");
-			total = total.add(itemPrice(barCodeInfo[0], getNum(barCodeInfo)));
+			shoppinglist.append(itemPrice(barCodeInfo));
 		}
-		Shoppinglist shoppinglist = new Shoppinglist();
-		shoppinglist.setTotal(total);
 		return shoppinglist;
 	}
 
@@ -37,9 +43,16 @@ public class CashRegister {
 		return new BigDecimal(barCodeInfo[1]);
 	}
 
-	private BigDecimal itemPrice(String barcode, BigDecimal num) {
+	private CommodityItem itemPrice(String[] barCodeInfo) {
+		String barcode = barCodeInfo[0];
 		Commodity commodity = commodityService.find(barcode);
-		return (commodity.getPrice()).multiply(num);
-	}
 
+		RuleEnum ruleByBarCode = RuleEnum.findRuleByBarCode(barcode, ruleService);
+
+		BigDecimal num = getNum(barCodeInfo);
+		
+		return ruleByBarCode.getRule().execute(num, commodity);
+		
+
+	}
 }

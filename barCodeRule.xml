@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<barCodeRules>
+	<barCodeRule barCode="ITEM000001">
+		<roleClassNames>BuyTwoGiveA</roleClassNames>
+	</barCodeRule>
+
+	<barCodeRule barCode="ITEM000003">
+		<roleClassNames>Discount</roleClassNames>
+	</barCodeRule>
+</barCodeRules>
