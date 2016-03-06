@@ -22,18 +22,9 @@ public class CashRegisterTest {
 	 */
 	@Test
 	public void testCashRegister_BuyTwoGiveA() throws Exception {
-		CashRegister cashRegister = new CashRegister(new XMLCommodityService(),
-				new XMLRuleService("testCashRegister_BuyTwoGiveA.xml"), new PrintConsole());
+		CashRegister cashRegister = createCashRegister("testCashRegister_BuyTwoGiveA.xml");
 		cashRegister.setBarcode(createBarCodes());
 		cashRegister.printReceipts();
-	}
-
-	private List<String> createBarCodes() {
-		List<String> barcodes = new ArrayList<String>();
-		barcodes.add("ITEM000001-3");
-		barcodes.add("ITEM000002-5");
-		barcodes.add("ITEM000003-2");
-		return barcodes;
 	}
 
 	/**
@@ -43,8 +34,7 @@ public class CashRegisterTest {
 	 */
 	@Test
 	public void testCashRegister_No_BuyTwoGiveA() throws Exception {
-		CashRegister cashRegister = new CashRegister(new XMLCommodityService(),
-				new XMLRuleService("testCashRegister_No_BuyTwoGiveA.xml"), new PrintConsole());
+		CashRegister cashRegister = createCashRegister("testCashRegister_No_BuyTwoGiveA.xml");
 		cashRegister.setBarcode(createBarCodes());
 		cashRegister.printReceipts();
 	}
@@ -56,8 +46,7 @@ public class CashRegisterTest {
 	 */
 	@Test
 	public void testCashRegister_Discount() throws Exception {
-		CashRegister cashRegister = new CashRegister(new XMLCommodityService(),
-				new XMLRuleService("testCashRegister_Discount.xml"), new PrintConsole());
+		CashRegister cashRegister = createCashRegister("testCashRegister_Discount.xml");
 		cashRegister.setBarcode(createBarCodes());
 		cashRegister.printReceipts();
 		assertTotal(cashRegister.calculate(), new BigDecimal("24.45"));
@@ -70,16 +59,32 @@ public class CashRegisterTest {
 	 */
 	@Test
 	public void testCashRegister_BuyTwoGiveA_Discount() throws Exception {
-		CashRegister cashRegister = new CashRegister(new XMLCommodityService(),
-				new XMLRuleService("testCashRegister_BuyTwoGiveA_Discount.xml"), new PrintConsole());
+		CashRegister cashRegister = createCashRegister("testCashRegister_BuyTwoGiveA_Discount.xml");
 		List<String> barcodes = new ArrayList<String>();
 		barcodes.add("ITEM000001-3");
 		barcodes.add("ITEM000002-6");
 		barcodes.add("ITEM000003-2");
 		cashRegister.setBarcode(barcodes);
 		cashRegister.printReceipts();
-
 		assertTotal(cashRegister.calculate(), new BigDecimal("20.45"));
+	}
+
+	private CashRegister createCashRegister(String ruleFileName) {
+		CashRegister cashRegister = new CashRegister(new XMLCommodityService(filePath("commoditys.xml")),
+				new XMLRuleService(filePath(ruleFileName)), new PrintConsole());
+		return cashRegister;
+	}
+
+	private String filePath(String fileName) {
+		return this.getClass().getResource(fileName).getPath();
+	}
+
+	private List<String> createBarCodes() {
+		List<String> barcodes = new ArrayList<String>();
+		barcodes.add("ITEM000001-3");
+		barcodes.add("ITEM000002-5");
+		barcodes.add("ITEM000003-2");
+		return barcodes;
 	}
 
 	private void assertTotal(Shoppinglist shoppings, BigDecimal expectTotal) {

@@ -11,12 +11,12 @@ import com.thoughtworks.cashRegister.obj.Commoditys;
 public class XMLCommodityService implements ICommodityService {
 	private List<Commodity> commodityList;
 
-	public XMLCommodityService() {
-		init();
+	public XMLCommodityService(String fileName) {
+		init(fileName);
 	}
 
-	private void init() {
-		Commoditys commoditys = JAXB.unmarshal(new File("commoditys.xml"), Commoditys.class);
+	private void init(String fileName) {
+		Commoditys commoditys = JAXB.unmarshal(new File(fileName), Commoditys.class);
 		this.commodityList = commoditys.getCommoditys();
 	}
 

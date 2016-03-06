@@ -12,7 +12,8 @@ public class CommodityserviceTest {
 
 	@Before
 	public void setUp() {
-		this.commodityService = new XMLCommodityService();
+		String path = this.getClass().getResource("commoditys.xml").getPath();
+		this.commodityService = new XMLCommodityService(path);
 	}
 
 	/**
