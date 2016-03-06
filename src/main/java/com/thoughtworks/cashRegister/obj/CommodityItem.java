@@ -1,15 +1,15 @@
 package com.thoughtworks.cashRegister.obj;
 
-import java.math.BigDecimal;
-
 public class CommodityItem {
-	private BigDecimal subtotal;
-	private Commodity commodity;
-	private BigDecimal thriftMoney;
-	private BigDecimal thriftNum;
-	private String nameOfPreferential;
+	private Money subtotal;// 小结
+	private Commodity commodity;// 商品信息
+	private Money thriftMoney;// 节省金额
+	private double thriftNum;// 优惠数量
+	private String nameOfPreferential;// 优惠名称
+	private double num;// 购买量
+	private boolean displayThrift;// 是否显示优惠信息
 
-	public BigDecimal getSubtotal() {
+	public Money getSubtotal() {
 		return subtotal;
 	}
 
@@ -17,15 +17,15 @@ public class CommodityItem {
 		return commodity;
 	}
 
-	public BigDecimal getThriftMoney() {
+	public Money getThriftMoney() {
 		return thriftMoney;
 	}
 
-	public BigDecimal getThriftNum() {
+	public double getThriftNum() {
 		return thriftNum;
 	}
 
-	public void setSubtotal(BigDecimal subtotal) {
+	public void setSubtotal(Money subtotal) {
 		this.subtotal = subtotal;
 	}
 
@@ -33,11 +33,11 @@ public class CommodityItem {
 		this.commodity = commodity;
 	}
 
-	public void setThriftMoney(BigDecimal thriftMoney) {
+	public void setThriftMoney(Money thriftMoney) {
 		this.thriftMoney = thriftMoney;
 	}
 
-	public void setThriftNum(BigDecimal thriftNum) {
+	public void setThriftNum(double thriftNum) {
 		this.thriftNum = thriftNum;
 	}
 
@@ -47,6 +47,22 @@ public class CommodityItem {
 
 	public String getNameOfPreferential() {
 		return this.nameOfPreferential;
+	}
+
+	public double getNum() {
+		return num;
+	}
+
+	public void setNum(double num) {
+		this.num = num;
+	}
+
+	public boolean isDisplayThrift() {
+		return displayThrift;
+	}
+
+	public void setDisplayThrift(boolean displayThrift) {
+		this.displayThrift = displayThrift;
 	}
 
 }

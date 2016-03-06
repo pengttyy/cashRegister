@@ -4,21 +4,24 @@ import java.math.BigDecimal;
 
 import com.thoughtworks.cashRegister.obj.Commodity;
 import com.thoughtworks.cashRegister.obj.CommodityItem;
+import com.thoughtworks.cashRegister.obj.Money;
 
 public class BuyTwoGiveA implements IpreferentialRule {
 	public CommodityItem execute(BigDecimal num, Commodity commodity) {
 		BigDecimal[] divideAndRemainder = num.divideAndRemainder(new BigDecimal("3"));
 		BigDecimal countNum = divideAndRemainder[0].multiply(new BigDecimal("2")).add(divideAndRemainder[1]);
-		BigDecimal subtotal = (commodity.getPrice()).multiply(countNum);
+		BigDecimal subtotal = (commodity.getPrice().getNum()).multiply(countNum);
 
-		BigDecimal thrift = num.multiply(commodity.getPrice()).subtract(subtotal);
+		BigDecimal thrift = num.multiply(commodity.getPrice().getNum()).subtract(subtotal);
 
 		CommodityItem commodityItem = new CommodityItem();
 		commodityItem.setCommodity(commodity);
-		commodityItem.setSubtotal(subtotal);
-		commodityItem.setThriftMoney(thrift);
-		commodityItem.setThriftNum(divideAndRemainder[0]);
+		commodityItem.setSubtotal(new Money(subtotal));
+		commodityItem.setThriftMoney(new Money(thrift));
+		commodityItem.setThriftNum(divideAndRemainder[0].doubleValue());
 		commodityItem.setNameOfPreferential(this.getRuleName());
+		commodityItem.setNum(num.doubleValue());
+		commodityItem.setDisplayThrift(true);
 		return commodityItem;
 	}
 

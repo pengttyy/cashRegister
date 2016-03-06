@@ -15,12 +15,18 @@ public class CommodityserviceTest {
 		this.commodityService = new XMLCommodityService();
 	}
 
+	/**
+	 * 根据条码查找商品信息
+	 */
 	@Test
 	public void testFind() {
 		String barcode = "ITEM000001";
 		assertCommodityBybarcode(barcode);
 	}
 
+	/**
+	 * 根据条码查找商品信息_未收录商品时
+	 */
 	@Test
 	public void testFind_Err() {
 		String notIncludeBarcode = "ITEM00000x";
@@ -36,7 +42,6 @@ public class CommodityserviceTest {
 		Commodity commodity = this.commodityService.find(barcode);
 		assertNotNull(commodity);
 		assertEquals(barcode, commodity.getBarcode());
-
 	}
 
 }

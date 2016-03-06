@@ -17,6 +17,10 @@ public class XMLRuleService implements IRuleService {
 	}
 
 	public BarCodeRule findRuleByBarCode(String barCode) {
+		if (rules == null) {
+			return null;
+		}
+
 		for (BarCodeRule barCodeRule : rules) {
 			if (barCode.equals(barCodeRule.getBarCode())) {
 				return barCodeRule;

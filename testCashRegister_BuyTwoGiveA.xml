@@ -3,12 +3,8 @@
 	<barCodeRule barCode="ITEM000001">
 		<roleClassNames>BuyTwoGiveA</roleClassNames>
 	</barCodeRule>
-	
+
 	<barCodeRule barCode="ITEM000002">
-		<roleClassNames>Discount</roleClassNames>
-	</barCodeRule>
-	
-	<barCodeRule barCode="ITEM000003">
-		<roleClassNames>Discount</roleClassNames>
+		<roleClassNames>BuyTwoGiveA</roleClassNames>
 	</barCodeRule>
 </barCodeRules>

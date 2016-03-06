@@ -1,10 +1,9 @@
 package com.thoughtworks.cashRegister.obj;
 
-import java.math.BigDecimal;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Commodity {
@@ -15,7 +14,8 @@ public class Commodity {
 	@XmlElement
 	private String unit;
 	@XmlElement
-	private BigDecimal price;
+	@XmlJavaTypeAdapter(JaxbMoneyAdapter.class)
+	private Money price;
 
 	public String getBarcode() {
 		return barcode;
@@ -41,11 +41,11 @@ public class Commodity {
 		this.unit = unit;
 	}
 
-	public BigDecimal getPrice() {
+	public Money getPrice() {
 		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(Money price) {
 		this.price = price;
 	}
 
