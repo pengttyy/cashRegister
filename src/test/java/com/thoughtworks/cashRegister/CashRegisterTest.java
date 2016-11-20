@@ -25,6 +25,7 @@ public class CashRegisterTest {
 		CashRegister cashRegister = createCashRegister("testCashRegister_BuyTwoGiveA.xml");
 		cashRegister.setBarcode(createBarCodes());
 		cashRegister.printReceipts();
+		throw new NullPointerException("test");
 	}
 
 	/**
