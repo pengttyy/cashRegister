@@ -3,7 +3,9 @@ jdk:
   - oraclejdk8
 
 before_script: true
-script: mvn test && mvn package
+script:
+  - mvn test
+  - mvn package
 
 
 notifications:
