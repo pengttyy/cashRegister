@@ -7,7 +7,6 @@ script:
   - mvn test
   - mvn package
 
-
 notifications:
   hipchat:
     rooms:
