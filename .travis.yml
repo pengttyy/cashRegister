@@ -18,7 +18,7 @@ deploy:
   provider: releases
   api_key:
     secure: q3zBc8uolgPPJdh08zamBcXETPp6O8R2A0eVdnyOalayefczBu5xa7z3gkf5ExwzKgRvlYE0sMLdSbuN8VFHTmqE42N+RyRv6CqnQmjEv1uGGYjFMg1fZnx0RDMdQ1eSXwg1RTS1q+q9w0rZeZ1IcJJw+cOfUSM75EoCz4XzE89ZiFh4EDDrn0EP66zhGYhORUypj+ULnGM1ws726CQJOAdI0BbbCFPJrSFKXcwbnlRR6omQyJe5wIUjXob0sbCe8WTQYS+cOGWUIiuXAS/+Bim/OTW7tnO9Z/zyWzpVACcETU3v5Fw+PoDpQGzGlHW3NxaBG0LNf2TCWNELNbwEglHWpq4Thq8wXa5iuZq1mnNrFjFOpyK9Y9GC740RZmEa0Xg3+Funf3rP2qhg6max6IcgANeNimeYHq6PJgbYy/JF59tDvpobsNiC5n9y28Mr7C5O6buejxWx0xY+y9Twz3aQDrFLQsSXPf90Bj5jIn33wDbpeGIfHExjsX9LWTCqc2T/om82vhK4wEAVOB36NPJIdaNAYs/Nqc3c3IPAB7reLi9EWExRuRnRFmDlevQGDqDugXTofx3mEHLJXLq5bm5SHKo8UywxaPbGwV2Dc6vtMxrxOBrUjaMq+VWlgA9bXFhmJVtsIYzc+uR2MeICv51GH9sSkaPBIAimyHy+KIw=
-  file:  target/cashRegister.jar
+  file:  target/cashRegister-0.0.1-SNAPSHOT.jar
   skip_cleanup: true
   on:
     repo: pengttyy/cashRegister
