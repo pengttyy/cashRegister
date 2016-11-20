@@ -1,6 +1,8 @@
 language: java
 jdk:
   - oraclejdk8
+
+before_script: true
 script: mvn package
 
 notifications:
