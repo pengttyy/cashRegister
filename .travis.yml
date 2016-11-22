@@ -7,7 +7,7 @@ script:
 - mvn package
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash -t 267b881b-fd25-4fb6-b31f-27e44c3e4891)
 
 notifications:
   hipchat:
