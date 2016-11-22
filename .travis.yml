@@ -17,7 +17,7 @@ notifications:
     - '%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message}
       (<a href="%{build_url}">Details</a>/<a href="%{compare_url}">Change view</a>)'
     format: html
-
+    
 deploy:
   provider: releases
   api_key:
