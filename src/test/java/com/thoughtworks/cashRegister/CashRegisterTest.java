@@ -90,6 +90,7 @@ public class CashRegisterTest {
 	private void assertTotal(Shoppinglist shoppings, BigDecimal expectTotal) {
 		assertNotNull(shoppings);
 		assertEquals(expectTotal.setScale(2), shoppings.getTotal().getNum());
+		
 	}
 
 }
